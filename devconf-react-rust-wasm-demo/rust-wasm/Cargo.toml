@@ -1,0 +1,40 @@
+[package]
+name = "rust-wasm"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+# A dynamic system library will be produced. 
+# This is used when compiling a dynamic library to be loaded from another language.
+[lib]
+crate-type=["cdylib"]
+
+# Wasm bindgen will be used for interoperability between Rust and WASM
+# Serde will be used to serialize/deserialize Rust objects in order to interact with WASM
+[dependencies]
+wasm-bindgen = { version = "0.2", features = ["serde-serialize"] }
+serde_json = "1.0.32"
+serde_derive = "1.0.80"
+serde = "1.0.80"
+
+# Web Sys is a library for importing features from the browser in Rust
+[dependencies.web-sys]
+version = "0.3.4"
+features = [
+  'Document',
+  'Element',
+  'HtmlElement',
+  'Node',
+  'Window',
+  "console"
+]
+
+# Optimizing features
+# The lto setting controls the -C lto flag which controls LLVM's link time optimizations. 
+# TO can produce better optimized code, using whole-program analysis, at the cost of longer linking time.
+# opt-level "s" and opt-level "z" are used to optimize for size
+# opt-level 1..3 are used to optimize for speed
+[profile.release]
+lto = true
+opt-level = 'z'
