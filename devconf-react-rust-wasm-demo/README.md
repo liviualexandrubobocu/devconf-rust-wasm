@@ -54,7 +54,7 @@ npm run build:wasm
 
 Import code in react via 
 ```
-import init, { concat_names_from_rust, concat_names_from_js } from 'rust-wasm';
+import init, { add, concat_names_from_rust, concat_names_from_js } from 'rust-wasm';
 ```
 
 And use them within React code.
