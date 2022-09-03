@@ -30,7 +30,7 @@ cargo new rust-wasm --lib
 Add to package.json file
 
 ```
-build:wasm": "cd rust-wasm && wasm-pack build --target web --out-dir rust-wasm-bundle",
+"build:wasm": "cd rust-wasm && wasm-pack build --target web --out-dir rust-wasm-bundle",
 ```
 
 ## Step 4
@@ -41,9 +41,28 @@ npm i ./rust-wasm/rust-wasm-bundle
 
 ## Step 5
 
-Write methods in lib.rs decorated with #[wasm_bindgen]
+Add to Cargo.toml file the following neccesary lines of configuration:
+
+```
+[lib]
+crate-type=["cdylib"]
+
+[dependencies]
+wasm-bindgen = { version = "0.2", features = ["serde-serialize"] }
+```
 
 ## Step 6
+
+Add import for wasm bindgen inside the library by the following lines:
+
+```
+extern crate wasm_bindgen;
+use wasm_bindgen::prelude::*;
+```
+
+Write methods in lib.rs decorated with #[wasm_bindgen]
+
+## Step 7
 
 Run build command 
 
@@ -51,7 +70,7 @@ Run build command
 npm run build:wasm
 ```
 
-## Step 7 
+## Step 8 
 
 Import code in react via 
 ```
@@ -60,7 +79,7 @@ import init, { add, concat_names_from_rust, concat_names_from_js } from 'rust-wa
 
 And use them within React code.
 
-## Step 8
+## Step 9
 
 Run the application
 ```
