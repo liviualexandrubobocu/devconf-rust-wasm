@@ -2,6 +2,7 @@
 
 ## Prerequisites
 Install Rust with Cargo
+
 Install wasm pack
 
 ```

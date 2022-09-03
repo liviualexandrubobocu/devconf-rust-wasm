@@ -37,4 +37,4 @@ features = [
 # opt-level 1..3 are used to optimize for speed
 [profile.release]
 lto = true
-opt-level = 'z'
+opt-level = 3
